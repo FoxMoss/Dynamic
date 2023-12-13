@@ -50,21 +50,6 @@ const client = await esbuild.context({
 
 client.watch();
 
-const html = await esbuild.context({
-  entryPoints: ["lib/html/index.ts"],
-  bundle: true,
-  outfile: "dist/dynamic.html.js",
-  format: "iife",
-  minify: true,
-  platform: "browser",
-  sourcemap: true,
-  target: ["es2020"],
-  plugins: [],
-  metafile: true,
-});
-
-html.watch();
-
 await copyFile("./lib/dynamic.config.js", "./dist/dynamic.config.js");
 
 console.log(await esbuild.analyzeMetafile((await worker.rebuild()).metafile));
